@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "ES2020",                    // Modern JS output
+    "module": "CommonJS",                  // Node uses CommonJS by default
+    "lib": ["ES2020"],                     // Built-in APIs available
+
+    /* Project Structure */
+    "rootDir": "./src",                    // Where your TS source files live
+    "outDir": "./dist",                    // Compiled JS goes here
+
+    /* Type Checking */
+    "strict": true,                        // Enable all strict type checks
+    "noImplicitAny": true,                 // Prevent untyped vars
+    "strictNullChecks": true,              // Treat null/undefined strictly
+
+    /* Module Resolution */
+    "esModuleInterop": true,               // Allow default imports for CJS modules
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,                  // Skip type checks in node_modules
+
+    /* Debugging */
+    "sourceMap": true                      // Generate .map files for debugging
+  },
+  "include": ["src"],                      // Only compile TS inside /src
+  "exclude": ["node_modules", "dist"]      // Don’t compile these
+}
