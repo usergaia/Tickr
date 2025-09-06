@@ -1,11 +1,11 @@
 import { Request, Response } from "express";
-import ItemModel, { IItem } from "../models/item.model";
-
+// import ItemModel, { IItem } from "../models/item.model";
+import StockModel, { Stocks } from "../models/item.model";
 
 // GET all items
 export const getItems = async (req: Request, res: Response): Promise<void> => {
   try {
-    const items: IItem[] = await ItemModel.find().sort({ age: 1 });
+    const items: Stocks[] = await StockModel.find().sort({ date: 1 });
     res.status(200).json(items);
   } catch (error: any) {
     res.status(500).json({ message: error.message });
@@ -16,7 +16,7 @@ export const getItems = async (req: Request, res: Response): Promise<void> => {
 export const getItem = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id } = req.params;
-    const item: IItem | null = await ItemModel.findById(id);
+    const item: Stocks | null = await StockModel.findById(id);
     if (!item) {
       res.status(404).json({ message: `No item found with ID ${id}` });
       return;
@@ -30,7 +30,7 @@ export const getItem = async (req: Request, res: Response): Promise<void> => {
 // POST create new item
 export const postItem = async (req: Request, res: Response): Promise<void> => {
   try {
-    const item: IItem = await ItemModel.create(req.body);
+    const item: Stocks = await StockModel.create(req.body);
     res.status(201).json(item);
   } catch (error: any) {
     res.status(500).json({ message: error.message });
@@ -41,7 +41,9 @@ export const postItem = async (req: Request, res: Response): Promise<void> => {
 export const updItem = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id } = req.params;
-    const item = await ItemModel.findByIdAndUpdate(id, req.body, { new: true });
+    const item = await StockModel.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
     if (!item) {
       res.status(404).json({ message: `Cannot find any item with ID ${id}` });
       return;
@@ -56,7 +58,7 @@ export const updItem = async (req: Request, res: Response): Promise<void> => {
 export const delItem = async (req: Request, res: Response): Promise<void> => {
   try {
     const { id } = req.params;
-    const item = await ItemModel.findByIdAndDelete(id);
+    const item = await StockModel.findByIdAndDelete(id);
     if (!item) {
       res.status(404).json({ message: `Cannot find any item with ID ${id}` });
       return;

@@ -1,36 +1,31 @@
 import mongoose, { Schema, Document } from "mongoose";
 
 // typeScript interface
-export interface IItem extends Document {
-  name: string;
-  age: number;
-  employed: boolean;
-  createdAt?: Date;
-  updatedAt?: Date;
+export interface Stocks extends Document {
+  symbol: string;
+  volume: number;
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+  date: Date;
 }
 
 // schema
-const ItemSchema: Schema = new Schema(
-  {
-    name: {
-      type: String,
-      required: [true, "Name is required"],
-    },
-    age: {
-      type: Number,
-      required: [true, "Age is required"],
-    },
-    employed: {
-      type: Boolean,
-      required: [true, "Employed status is required"],
-    },
-  },
-  {
-    timestamps: true,
-  }
+const StockSchema: Schema = new Schema({
+  symbol: { type: String, required: [true, "Symbol is required"] },
+  volume: { type: Number, required: [true, "Volume is required"] },
+  open: { type: Number, required: [true, "Open price is required"] },
+  high: { type: Number, required: [true, "High price is required"] },
+  low: { type: Number, required: [true, "Low price is required"] },
+  close: { type: Number, required: [true, "Close price is required"] },
+  date: { type: Date, required: [true, "Date is required"] },
+});
+
+const StockModel = mongoose.model<Stocks>(
+  "Stocks", //name
+  StockSchema, // schema
+  "daily_prices", // collection name
 );
 
-// model of schema
-const ItemModel = mongoose.model<IItem>("Item", ItemSchema);
-
-export default ItemModel;
+export default StockModel;

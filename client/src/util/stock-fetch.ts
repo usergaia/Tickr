@@ -1,11 +1,15 @@
-export type Item = {
+export type Stocks = {
   _id?: string;
-  name: string;
-  age: number;
-  employed: boolean;
+  symbol: string;
+  volume: number;
+  open: number;
+  high: number;
+  low: number;
+  close: number;
+  date: Date;
 };
 
-export async function fetchItems(): Promise<Item[]> {
+export async function fetchItems(): Promise<Stocks[]> {
   const res = await fetch("http://localhost:2000/api/items", {
     cache: "no-store",
   });
