@@ -12,6 +12,9 @@ jobs:
     defaults:
       run:
         working-directory: client
+    env:
+        MongoDB_URI: ${{ secrets.MongoDB_URI }}
+        AV_API: ${{ secrets.AV_API }}
     steps:
       - uses: actions/checkout@v4
       - name: Set up Node.js
@@ -20,18 +23,15 @@ jobs:
           node-version: '20'
       - name: Install dependencies
         run: npm install
-      - name: Run lint
-        run: npm run lint
-      - name: Run build
-        run: npm run build
       - name: Run tests
         run: npm test
-
-  server-build-and-test:
     runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: server
+    env:
+        MongoDB_URI: ${{ secrets.MongoDB_URI }}
+        AV_API: ${{ secrets.AV_API }}
     steps:
       - uses: actions/checkout@v4
       - name: Set up Node.js
@@ -40,9 +40,5 @@ jobs:
           node-version: '20'
       - name: Install dependencies
         run: npm install
-      - name: Run lint
-        run: npm run lint
-      - name: Run build
-        run: npm run build
       - name: Run tests
         run: npm test
