@@ -1,8 +1,7 @@
 import express, { Request, Response } from "express";
 import connectDB from "./db";
-import itemRoutes from "./routes/item.route";
+import itemRoutes from "./routes/stocks.route";
 import cors from "cors";
-
 
 const app = express();
 const port = 2000;
@@ -10,7 +9,6 @@ const port = 2000;
 // mw
 app.use(cors());
 app.use(express.json());
-
 
 // routes
 app.use("/api/items", itemRoutes);
