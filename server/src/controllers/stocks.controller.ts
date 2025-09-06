@@ -1,6 +1,5 @@
 import { Request, Response } from "express";
-// import ItemModel, { IItem } from "../models/item.model";
-import StockModel, { Stocks } from "../models/item.model";
+import StockModel, { Stocks } from "../models/stocks.model";
 
 // GET all items
 export const getItems = async (req: Request, res: Response): Promise<void> => {

@@ -1,17 +1,15 @@
+export type HistoricalPrice = {
+  date: string;
+  close: number;
+};
+
 export type Stocks = {
   _id?: string;
   symbol: string;
-  volume: number;
-  open: number;
-  high: number;
-  low: number;
-  close: number;
-  date: Date;
+  historical: HistoricalPrice[];
 };
 
-export async function fetchItems(): Promise<Stocks[]> {
-  const res = await fetch("http://localhost:2000/api/items", {
-    cache: "no-store",
-  });
+export async function fetchStocks(): Promise<Stocks[]> {
+  const res = await fetch("http://localhost:2000/api/items");
   return res.json();
 }

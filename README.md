@@ -1,1 +1,1 @@
-# MERN Stack | Skeleton
+# Tickr | Stock Tracker

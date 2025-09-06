@@ -1,34 +1,73 @@
-import { fetchItems, Stocks } from "../../util/stock-fetch";
+import { fetchStocks, Stocks } from "../../util/stock-fetch";
+import clsx from "clsx";
 
 export default async function StockBoard() {
-  const backendData: Stocks[] = await fetchItems();
+  const backendData: Stocks[] = await fetchStocks();
+
   return (
-    <div className="grid min-h-screen grid-rows-[20px_1fr_20px] items-center justify-items-center gap-16 p-8 pb-20 font-sans sm:p-20">
-      <h1 className="mb-4 text-2xl font-bold">Items from Backend</h1>
+    <div className="relative top-15 left-14 flex min-h-screen w-full max-w-5xl flex-col items-center p-0 font-sans">
       {backendData && backendData.length > 0 ? (
-        <div className="grid grid-cols-1 gap-4">
+        <div className="flex w-full flex-col justify-center">
           {backendData.map((item: Stocks, index: number) => (
-            <div key={item._id || index} className="rounded border p-4 shadow">
-              <div>
-                <strong>Symbol:</strong> {item.symbol}
+            <div
+              key={item._id || index}
+              className="h-150 w-230 rounded-lg border border-gray-300 bg-white p-6 shadow-lg"
+            >
+              <div className="text-xl font-semibold text-black">
+                <span className="text-black">Symbol:</span> {item.symbol}
               </div>
               <div>
-                <strong>Volume:</strong> {item.volume}
-              </div>
-              <div>
-                <strong>Open:</strong> {item.open}
-              </div>
-              <div>
-                <strong>High:</strong> {item.high}
-              </div>
-              <div>
-                <strong>Low:</strong> {item.low}
-              </div>
-              <div>
-                <strong>Close:</strong> {item.close}
-              </div>
-              <div>
-                <strong>Date:</strong> {item.date.toString()}
+                <span className="font-medium text-black">
+                  Historical Prices:
+                </span>
+                {item.historical && item.historical.length > 0 ? (
+                  <div className="max-h-130 w-full overflow-y-auto text-black">
+                    <table className="w-full text-left text-sm">
+                      <thead>
+                        <tr className="border-b">
+                          <th className="px-2 py-1">Date</th>
+                          <th className="px-2 py-1">Close</th>
+                          <th className="px-2 py-1">Change</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {item.historical
+                          .slice(0, 20)
+                          .map((price, priceIndex) => (
+                            <tr
+                              key={priceIndex}
+                              className="border-b hover:bg-gray-50"
+                            >
+                              <td className="px-2 py-1">{price.date}</td>
+                              <td className="px-2 py-1">${price.close}</td>
+                              <td className="px-2 py-1">
+                                {/* stock change difference */}
+                                {priceIndex < item.historical.length - 1 ? (
+                                  <span
+                                    className={clsx(
+                                      price.close >
+                                        item.historical[priceIndex + 1].close
+                                        ? "text-green-600"
+                                        : "text-red-600",
+                                    )}
+                                  >
+                                    {(
+                                      price.close -
+                                      item.historical[priceIndex + 1].close
+                                    ).toFixed(2)}
+                                  </span>
+                                ) : null}
+                              </td>
+                            </tr>
+                          ))}
+                      </tbody>
+                    </table>
+                  </div>
+                ) : (
+                  <div className="text-sm text-gray-500">
+                    No historical data
+                  </div>
+                )}
               </div>
             </div>
           ))}

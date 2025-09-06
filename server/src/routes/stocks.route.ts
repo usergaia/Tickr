@@ -1,5 +1,11 @@
 import { Router } from "express";
-import { getItem, getItems, postItem, updItem, delItem } from "../controllers/item.controller";
+import {
+  getItem,
+  getItems,
+  postItem,
+  updItem,
+  delItem,
+} from "../controllers/stocks.controller";
 
 const router = Router();
 
