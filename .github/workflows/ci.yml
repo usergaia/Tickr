@@ -12,9 +12,6 @@ jobs:
     defaults:
       run:
         working-directory: client
-    env:
-        MongoDB_URI: ${{ secrets.MongoDB_URI }}
-        AV_API: ${{ secrets.AV_API }}
     steps:
       - uses: actions/checkout@v4
       - name: Set up Node.js
@@ -31,9 +28,6 @@ jobs:
     defaults:
       run:
         working-directory: server
-    env:
-        MongoDB_URI: ${{ secrets.MongoDB_URI }}
-        AV_API: ${{ secrets.AV_API }}
     steps:
       - uses: actions/checkout@v4
       - name: Set up Node.js

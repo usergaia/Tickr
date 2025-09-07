@@ -8,7 +8,7 @@ const connectDB = async (): Promise<void> => {
   try {
     const conn = await mongoose.connect(process.env.MongoDB_URI as string);
     console.log(`MongoDB Connected: ${conn.connection.host}`);
-    await fetchAndStoreAV();
+    // await fetchAndStoreAV();
     console.log("Stock data fetched and stored successfully.");
   } catch (error: any) {
     console.error(`Error: ${error.message}`);

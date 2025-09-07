@@ -4,10 +4,43 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export async function fetchAndStoreAV() {
-  // const stockSymbols = ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA"];
-  const stockSymbols = ["IBM"]; //
+  const stockSymbols = [
+    "AAPL", // Apple
+    "MSFT", // Microsoft
+    "GOOGL", // Google
+    "AMZN", // Amazon
+    "NVDA", // Nvidia
+    "META", // Meta Platforms (Facebook)
+    "ORCL", // Oracle
+    "IBM", // IBM
+    "CRM", // Salesforce
+    "ADBE", // Adobe
+    "INTU", // Intuit
+    "CSCO", // Cisco
+    "SAP", // SAP
+    "NOW", // ServiceNow
+    "SNOW", // Snowflake
+    "PLTR", // Palantir
+    "WDAY", // Workday
+    "AVGO", // Broadcom
+    "NET", // Cloudflare
+    "DDOG", // Datadog
+  ];
+
+  try {
+    for (const stockSymbol of stockSymbols) {
+      await fetchStocks(stockSymbol);
+      console.log(`Stocks for ${stockSymbol} saved/updated (last 30 days).`);
+    }
+  } catch (error) {
+    console.error("Error fetching stock data:", error);
+    return;
+  }
+}
+
+async function fetchStocks(stockSymbol: string) {
   const response = await axios.get(
-    `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${stockSymbols}&apikey=${process.env.AV_API}`,
+    `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${stockSymbol}&apikey=${process.env.AV_API}`,
   );
   const data = response.data;
 
@@ -33,12 +66,9 @@ export async function fetchAndStoreAV() {
     .sort((a, b) => b.date.localeCompare(a.date)) // sort latest first
     .slice(0, 30);
 
-  // draft for updating to db
   await StockModel.updateOne(
     { symbol },
     { symbol, historical },
     { upsert: true },
   );
-
-  console.log(`✅ Stocks for ${symbol} saved/updated (last 30 days).`);
 }

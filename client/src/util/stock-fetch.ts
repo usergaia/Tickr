@@ -4,7 +4,7 @@ export type HistoricalPrice = {
 };
 
 export type Stocks = {
-  _id?: string;
+  _id: string;
   symbol: string;
   historical: HistoricalPrice[];
 };

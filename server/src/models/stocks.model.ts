@@ -17,12 +17,15 @@ const StockSchema: Schema = new Schema({
     required: [true, "Symbol is required"],
     unique: true,
   },
-  historical: [
-    {
-      date: { type: String, required: true },
-      close: { type: Number, required: true },
-    },
-  ],
+  historical: {
+    type: [
+      {
+        date: { type: String, required: [true, "Date is required"] },
+        close: { type: Number, required: [true, "Close price is required"] },
+      },
+    ],
+    required: [true, "Historical data is required"],
+  },
 });
 
 const StockModel = mongoose.model<Stocks>(
