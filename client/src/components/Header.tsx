@@ -1,12 +1,11 @@
-import logo from "@/../public/globe.svg";
 import { GrSend } from "react-icons/gr";
-import Image from "next/image";
+import { LuConstruction } from "react-icons/lu";
 export function Header() {
   return (
     <div className="flex w-full items-center justify-between border-b-2 p-2">
       <div className="flex items-center">
         <div className="ml-8">
-          <Image src={logo} alt="Logo" className="h-8 w-8" />
+          <LuConstruction className="h-8 w-8 text-gray-600" />
         </div>
         <div className="flex items-center text-[13px] select-none">
           <div className="ml-2 text-xl font-bold">Tickr</div>
