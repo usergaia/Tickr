@@ -11,15 +11,15 @@ const router = Router();
 
 // GET
 router.get("/", getItems);
-router.get("/:id", getItem);
+router.get("/:symbol", getItem);
 
 // POST
 router.post("/", postItem);
 
 // PUT
-router.put("/:id", updItem);
+router.put("/:symbol", updItem);
 
 // DELETE
-router.delete("/:id", delItem);
+router.delete("/:symbol", delItem);
 
 export default router;

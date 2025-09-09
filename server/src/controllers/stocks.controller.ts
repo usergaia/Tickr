@@ -11,13 +11,13 @@ export const getItems = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-// GET single item by ID
+// GET single item by symbol
 export const getItem = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { id } = req.params;
-    const item: Stocks | null = await StockModel.findById(id);
+    const { symbol } = req.params;
+    const item: Stocks | null = await StockModel.findOne({ symbol });
     if (!item) {
-      res.status(404).json({ message: `No item found with ID ${id}` });
+      res.status(404).json({ message: `No item found with symbol ${symbol}` });
       return;
     }
     res.status(200).json(item);
@@ -26,6 +26,7 @@ export const getItem = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
+// UNUSED - WILL DECIDE WHETHER TO KEEP OR DELETE AFTER FINISHING MORE IMPORTANT TASKS
 // POST create new item
 export const postItem = async (req: Request, res: Response): Promise<void> => {
   try {

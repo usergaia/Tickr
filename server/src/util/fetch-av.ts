@@ -26,7 +26,6 @@ export async function fetchAndStoreAV() {
     "NET", // Cloudflare
     "DDOG", // Datadog
   ];
-
   try {
     for (const stockSymbol of stockSymbols) {
       await fetchStocks(stockSymbol);
