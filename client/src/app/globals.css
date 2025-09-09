@@ -1,6 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap");
 @import "tailwindcss";
 @plugin "daisyui" {
   themes:
-    dim --default,
+    light --default,
     cupcake;
+}
+
+/* hide scrollbar for Chrome, Safari, Edge */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+* {
+  font-family: "Inter", sans-serif;
 }
