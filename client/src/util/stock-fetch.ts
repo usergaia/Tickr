@@ -19,12 +19,12 @@ export type Stocks = {
 
 // fetch all stocks
 export async function fetchStocks(): Promise<Stocks[]> {
-  const res = await fetch("http://localhost:2000/api/items");
+  const res = await fetch("http://localhost:1000/stocks");
   return res.json();
 }
 
 // fetch one stock by symbol
 export async function fetchOne(symbol: string): Promise<Stocks> {
-  const res = await fetch(`http://localhost:2000/api/items/${symbol}`);
+  const res = await fetch(`http://localhost:1000/stocks/${symbol}`);
   return res.json();
 }
