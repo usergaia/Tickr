@@ -1,23 +1,30 @@
 import { FaGithub } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { SiHuggingface } from "react-icons/si";
+import Router from "../hooks/Router";
 
 export function Footer() {
   return (
-    <div className="flex flex-row items-center justify-center border-t-2 p-4">
-      <div className="font-[system-ui] text-gray-500/70 italic">
+    <div className="relative flex flex-col items-center justify-center gap-4 border-t-2 p-4 lg:flex-row lg:gap-0">
+      <div id="copyright" className="text-center text-gray-500/70 lg:text-left">
         © 2025 @usergaia
       </div>
-      <div className="absolute right-0 m-2 flex cursor-pointer flex-row text-gray-500/50">
-        <div className="mr-2 text-3xl">
-          <FaGithub />
-        </div>
-        <div className="mr-2 text-3xl">
-          <FaLinkedin />
-        </div>
-        <div className="mr-2 text-3xl">
-          <SiHuggingface />
-        </div>
+      <div className="flex cursor-pointer flex-row gap-2 text-gray-500/50 lg:absolute lg:top-1/2 lg:right-4 lg:-translate-y-1/2">
+        <Router path="https://github.com/usergaia/Tickr">
+          <span className="text-2xl transition-colors hover:text-gray-700 lg:text-3xl">
+            <FaGithub />
+          </span>
+        </Router>
+        <Router path="https://www.linkedin.com/in/edgar-rafael-user5777/">
+          <span className="text-2xl transition-colors hover:text-gray-700 lg:text-3xl">
+            <FaLinkedin />
+          </span>
+        </Router>
+        <Router path="https://huggingface.co/">
+          <span className="text-2xl transition-colors hover:text-gray-700 lg:text-3xl">
+            <SiHuggingface />
+          </span>
+        </Router>
       </div>
     </div>
   );
