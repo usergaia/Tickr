@@ -26,6 +26,7 @@ export async function fetchAndStoreAV() {
     "NET", // Cloudflare
     "DDOG", // Datadog
   ];
+  // const stockSymbols = ["IBM"]; // for testing
   try {
     for (const stockSymbol of stockSymbols) {
       await fetchStocks(stockSymbol);
@@ -43,31 +44,45 @@ async function fetchStocks(stockSymbol: string) {
   );
   const data = response.data;
 
-  // extract symbol
+  // extract metadata properties
   const meta = data["Meta Data"];
   const symbol = meta["2. Symbol"];
+  const lastRefreshed = meta["3. Last Refreshed"];
+  const timezone = meta["5. Time Zone"];
+  if (!symbol || !lastRefreshed || !timezone)
+    throw new Error("Invalid metadata from API");
 
   // extract time series data
   const seriesKey = Object.keys(data).find((k) => k.startsWith("Time Series"));
   if (!seriesKey) throw new Error("No Time Series data found");
   const timeSeries = data[seriesKey];
 
-  // extract close from time series
-  type TimeSeriesClose = { "4. close": string };
-  const timeSeriesTyped = timeSeries as Record<string, TimeSeriesClose>;
+  // extract ohlcv from time series
+  type TimeSeriesData = {
+    "1. open": string;
+    "2. high": string;
+    "3. low": string;
+    "4. close": string;
+    "5. volume": string;
+  };
+  const timeSeriesTyped = timeSeries as Record<string, TimeSeriesData>;
 
   // store last 30 days of data to db
   const historical: HistoricalPrice[] = Object.entries(timeSeriesTyped)
     .map(([date, values]) => ({
       date: date,
+      open: parseFloat(values["1. open"]),
+      high: parseFloat(values["2. high"]),
+      low: parseFloat(values["3. low"]),
       close: parseFloat(values["4. close"]),
+      volume: parseInt(values["5. volume"]),
     }))
     .sort((a, b) => b.date.localeCompare(a.date)) // sort latest first
     .slice(0, 30);
 
   await StockModel.updateOne(
     { symbol },
-    { symbol, historical },
+    { symbol, historical, lastRefreshed, timezone },
     { upsert: true },
   );
 }

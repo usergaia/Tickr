@@ -1,15 +1,20 @@
 export type HistoricalPrice = {
   date: string;
   close: number;
+  open: number;
+  high: number;
+  low: number;
+  volume: number;
 };
 
-// will add more properties after updating db
 export type Stocks = {
   _id: string;
   symbol: string;
   name?: string;
   stock_name?: string;
   historical: HistoricalPrice[];
+  lastRefreshed?: string;
+  timezone?: string;
 };
 
 // fetch all stocks
