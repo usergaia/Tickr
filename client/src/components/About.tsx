@@ -7,18 +7,19 @@ import { IoCodeSlashSharp } from "react-icons/io5";
 export function About() {
   return (
     <>
-      <div className="mt-4 ml-4 lg:ml-28">
-        <h1 className="text-4xl font-extrabold">About Tickr</h1>
-        <p className="flex max-w-2xl text-left text-base text-[13px] text-gray-500">
-          Tickr is designed to track the most popular software and technology
-          stocks, giving you clear insights into market movements. It highlights
-          top gainers, highest closing prices, and measures volatility with
-          machine learning models. By focusing on the tech sector, Tickr
+      <div className="m-5 mt-4 flex flex-col items-center justify-center text-center lg:mr-40 lg:ml-28">
+        <h1 className="mono text-4xl font-bold">About Tickr</h1>
+        <p className="mono max-w-2xl text-center text-base text-[13px] text-gray-500 lg:mt-5 lg:text-sm">
+          Tickr is designed to track the popular software and technology stocks,
+          giving you clear insights into market movements. It highlights{" "}
+          <span className="text-red-300">latest top gainers</span>,{" "}
+          <span className="text-red-300">highest closing prices</span>, and{" "}
+          <span className="text-red-300">visualization</span> of data. Tickr
           provides the tools and data you need to navigate the market and invest
           confidently in the companies you know best.
         </p>
       </div>
-      <div className="m-4 mt-4 mr-14 ml-14 lg:mr-40 lg:ml-40 lg:grid">
+      <div className="m-4 mt-4 mr-14 ml-14 flex flex-col lg:mr-40 lg:ml-40 lg:grid">
         <div className="mt-5 w-full rounded-lg border-1 border-gray-300/50 p-4">
           <h2 className="flex text-lg font-semibold">
             <span className="text-blue-500">
@@ -48,16 +49,11 @@ export function About() {
           </h2>
           <p className="mt-2 text-sm text-black/70">
             By focusing on software enterprises, Tickr keeps the scope clear
-            without losing depth, even with the API’s limits.
-          </p>
-          <p className="mt-2 text-sm text-black/70">
-            As developers, we experience the dynamics of the tech world
-            firsthand, we see new companies rise and watch trends shape the
-            digital economy. Tickr builds on that perspective, treating it as an
-            advantage when looking at the stock market. In a time where software
-            and tech touch almost everyone’s lives, following these companies
-            feels both practical and relatable, especially since many of the
-            tracked stocks are names people already know.
+            without losing depth, even with the API&apos;s limits. This targeted
+            approach allows for deeper analysis of companies that many people
+            are already familiar with. Rather than spreading thin across all
+            market sectors, this focus enables more meaningful insights into the
+            companies that shape the technology landscape we work in every day.
           </p>
         </div>
         <div className="mt-5 w-full rounded-lg border-1 border-gray-300/50 p-4">
@@ -72,6 +68,15 @@ export function About() {
             full-stack applications that handle real-time data at scale. Working
             with financial data provided an excellent opportunity to explore
             modern web technologies, and implement effective caching strategies.
+            For more technical details, implementation insights, or to
+            contribute to the project, feel free to check out the{" "}
+            <Router path="https://github.com/usergaia/tickr">
+              <span className="rounded p-1 text-sm font-semibold hover:bg-gray-300">
+                GitHub repository{" "}
+                <FaExternalLinkAlt className="mb-1 inline text-xs text-gray-500" />
+              </span>
+            </Router>
+            .
           </p>
         </div>
       </div>

@@ -21,7 +21,7 @@
   font-family: "Inter", sans-serif;
 }
 
-#copyright {
+.mono {
   /* color: red; */
   font-family: "monospace", monospace;
 }
