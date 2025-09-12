@@ -31,13 +31,9 @@ export default async function StockDetail({
               <div className="mb-6 rounded-lg border border-gray-200 bg-white p-4 shadow-sm lg:p-6">
                 <div className="mb-2">
                   <h1 className="text-xl font-semibold text-gray-900 lg:text-2xl">
-                    {stockData.name ||
-                      stockData.stock_name ||
-                      `${stockData.symbol} Inc.`}
+                    {stockData.stock_name}
                   </h1>
-                  <div className="text-sm text-gray-600">
-                    {stockData.symbol}
-                  </div>
+                  <div className="text-sm text-gray-600">{stockData.name}</div>
                 </div>
                 {stockData.historical && stockData.historical.length > 0 ? (
                   <div className="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:gap-4">
