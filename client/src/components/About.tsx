@@ -65,15 +65,13 @@ export function About() {
             <span className="text-blue-500">
               <IoCodeSlashSharp className="mr-1 mb-1 inline" />
             </span>{" "}
-            Developer&apos;s Note
+            Footnote
           </h2>
           <p className="mt-2 text-sm text-black/70">
-            The development of Tickr grew out of my interest in integrating
-            machine learning models into web applications, with time series data
-            as a great starting point. Building it allowed me to explore
-            concepts common in the tech industry while gaining hands-on
-            experience with different tools and frameworks, expanding my options
-            for future tech stacks.
+            The development of Tickr grew out of my interest in building
+            full-stack applications that handle real-time data at scale. Working
+            with financial data provided an excellent opportunity to explore
+            modern web technologies, and implement effective caching strategies.
           </p>
         </div>
       </div>

@@ -6,26 +6,27 @@ dotenv.config();
 export async function fetchAndStoreAV() {
   const stockSymbols = [
     "AAPL", // Apple
-    "MSFT", // Microsoft
-    "GOOGL", // Google
-    "AMZN", // Amazon
-    "NVDA", // Nvidia
-    "META", // Meta Platforms (Facebook)
-    "ORCL", // Oracle
-    "IBM", // IBM
-    "CRM", // Salesforce
     "ADBE", // Adobe
-    "INTU", // Intuit
-    "CSCO", // Cisco
-    "SAP", // SAP
-    "NOW", // ServiceNow
-    "SNOW", // Snowflake
-    "PLTR", // Palantir
-    "WDAY", // Workday
+    "AMZN", // Amazon
     "AVGO", // Broadcom
-    "NET", // Cloudflare
+    "CRM", // Salesforce
+    "CSCO", // Cisco
     "DDOG", // Datadog
+    "GOOGL", // Google
+    "IBM", // IBM
+    "INTU", // Intuit
+    "META", // Meta Platforms (Facebook)
+    "MSFT", // Microsoft
+    "NET", // Cloudflare
+    "NOW", // ServiceNow
+    "NVDA", // Nvidia
+    "ORCL", // Oracle
+    "PLTR", // Palantir
+    "SAP", // SAP
+    "SNOW", // Snowflake
+    "WDAY", // Workday
   ];
+
   // const stockSymbols = ["IBM"]; // for testing
   try {
     for (const stockSymbol of stockSymbols) {
