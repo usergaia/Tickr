@@ -9,6 +9,9 @@ on:
 jobs:
   test-client:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
     defaults:
       run:
         working-directory: client
@@ -57,6 +60,9 @@ jobs:
 
   test-server:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
     defaults:
       run:
         working-directory: server
