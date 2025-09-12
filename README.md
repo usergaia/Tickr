@@ -144,23 +144,24 @@ npm run lint    # Run ESLint
 - `GET /stocks/:symbol` - Get specific stock data
 - `GET /health` - Health check endpoint
 
-### Response Format
+### Sample Response Format
 ```json
 {
   "_id": "string",
   "symbol": "AAPL",
-  "name": "Apple Inc.",
   "historical": [
     {
       "date": "2025-09-12",
-      "close": 150.25,
       "open": 149.50,
       "high": 151.00,
       "low": 148.75,
+      "close": 150.25,
       "volume": 50000000
     }
   ],
-  "lastRefreshed": "2025-09-12T10:00:00Z",
+  "stock_name": "Apple Inc",
+  "name": "Apple",
+  "lastRefreshed": "2025-09-11",
   "timezone": "US/Eastern"
 }
 ```
