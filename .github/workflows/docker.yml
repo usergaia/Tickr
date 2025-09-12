@@ -25,6 +25,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
+      - name: Create test environment files
+        run: |
+          echo "Creating test .env files for Docker validation..."
+          echo "MongoDB_URI=mongodb://test:test@localhost:27017/test" > server/.env
+          echo "AV_API=test_api_key" >> server/.env
+          echo "UPSTASH_REDIS_REST_URL=https://test-redis.upstash.io" >> server/.env
+          echo "UPSTASH_REDIS_REST_TOKEN=test_token" >> server/.env
+          echo "NEXT_PUBLIC_API_URL=http://localhost:1000" > client/.env
+      
       - name: Build server Docker image
         run: |
           echo "Building server image..."
