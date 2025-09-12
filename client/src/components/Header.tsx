@@ -55,15 +55,15 @@ export function Header() {
               htmlFor="mobile-menu-toggle"
               className="block cursor-pointer rounded p-2 hover:bg-gray-100"
             >
-              <div className="flex h-5 w-5 flex-col justify-between">
-                <div className="h-0.5 w-full bg-gray-600 transition-transform duration-300"></div>
-                <div className="h-0.5 w-full bg-gray-600 transition-opacity duration-300"></div>
+              <div className="flex h-5 w-5 flex-col">
+                <div className="mt-1 mb-1 h-0.5 w-full bg-gray-600 transition-transform duration-300"></div>
+                <div className="mb-1 h-0.5 w-full bg-gray-600 transition-transform duration-300"></div>
                 <div className="h-0.5 w-full bg-gray-600 transition-transform duration-300"></div>
               </div>
             </label>
 
             {/* menu dropdown in mobile mq */}
-            <div className="absolute top-full right-0 z-10 hidden w-screen max-w-sm border-t bg-white shadow-lg peer-checked:block">
+            <div className="absolute top-full right-0 z-10 hidden w-screen max-w-sm border-t bg-white shadow-lg select-none peer-checked:block">
               <div className="flex flex-col space-y-1 p-4">
                 <Router path={`/`}>
                   <div className="cursor-pointer rounded p-2 hover:bg-gray-100">

@@ -8,7 +8,7 @@ export function About() {
   return (
     <>
       <div className="m-5 mt-4 flex flex-col items-center justify-center text-center lg:mr-40 lg:ml-28">
-        <h1 className="mono text-4xl font-bold">About Tickr</h1>
+        <h1 className="mono mb-2 text-4xl font-bold">About Tickr</h1>
         <p className="mono max-w-2xl text-center text-base text-[13px] text-gray-500 lg:mt-5 lg:text-sm">
           Tickr is designed to track EOD close prices for popular SWE stocks,
           giving you clear insights into their market movements. It highlights{" "}
