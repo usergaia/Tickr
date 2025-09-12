@@ -8,6 +8,7 @@ import {
   LineElement,
   Tooltip,
   Legend,
+  Filler,
 } from "chart.js";
 
 import { Line } from "react-chartjs-2";
@@ -30,6 +31,7 @@ ChartJS.register(
 
   // implicitly used by Line
   Tooltip,
+  Filler,
 );
 
 // props format

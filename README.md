@@ -112,7 +112,6 @@ npm run lint    # Run ESLint
 - 💰 **Highest Close Prices** - Monitor highest performing stocks
 - ⚡ **Fast Performance** - Redis caching and client-side optimization
 - 🐳 **Docker Support** - Easy deployment and development
-- 📱 **Responsive Design** - Works on desktop and mobile
 - 🔄 **Auto-refresh** - Daily data updates with caching [wip]
 
 ## Tech Stack

@@ -10,7 +10,7 @@ export default async function StockDetail({
 }: {
   params: { symbol: string };
 }) {
-  const { symbol } = params;
+  const { symbol } = await params;
 
   try {
     const stockData = await fetchOne(symbol);
