@@ -1,7 +1,6 @@
-import { Stocks } from "../util/stock-fetch";
+import { Stocks, fetchStocks } from "../util/stock-fetch";
 import clsx from "clsx";
-import { getTopGain } from "../util/get-top";
-import { getTopClose } from "../util/get-top";
+import { getTopGain, getTopClose } from "../util/get-top";
 import Router from "../hooks/Router";
 import { FaAngleDown } from "react-icons/fa6";
 import { FaAngleUp } from "react-icons/fa6";
@@ -9,9 +8,13 @@ import { FaAnglesUp } from "react-icons/fa6";
 import { FaAnglesDown } from "react-icons/fa6";
 
 export default async function Dashboard() {
-  const topStocks: Stocks[] | null = await getTopGain();
-  const topClose: Stocks[] | null = await getTopClose();
-  const volatility: string | null = null; // will add ml model after finalizing ui
+  // single API call instead of multiple
+  const allStocks: Stocks[] = await fetchStocks();
+
+  // process data locally instead of making separate API calls
+  const topStocks: Stocks[] = getTopGain(allStocks);
+  const topClose: Stocks[] = getTopClose(allStocks);
+  // const volatility: string | null = null; // might add ml model
 
   return (
     <>
@@ -30,9 +33,9 @@ export default async function Dashboard() {
                     <th className="hidden px-3 py-2 sm:table-cell">Date</th>
                     <th className="px-3 py-2">Close</th>
                     <th className="px-3 py-2">Change</th>
-                    <th className="hidden px-3 py-2 lg:table-cell">
+                    {/* <th className="hidden px-3 py-2 lg:table-cell">
                       Volatility
-                    </th>
+                    </th> */}
                   </tr>
                 </thead>
                 <tbody>
@@ -66,9 +69,9 @@ export default async function Dashboard() {
                                 </span>
                               )}
                             </td>
-                            <td className="hidden px-3 py-2 text-gray-500 lg:table-cell">
+                            {/* <td className="hidden px-3 py-2 text-gray-500 lg:table-cell">
                               {volatility ? volatility : "N/A"}
-                            </td>
+                            </td> */}
                           </tr>
                         ) : null;
                       })
@@ -77,11 +80,7 @@ export default async function Dashboard() {
               </table>
             </div>
           </div>
-        ) : (
-          <div className="mb-6 flex w-full justify-center p-8">
-            <div className="text-gray-500">Loading...</div>
-          </div>
-        )}
+        ) : null}
         {/* highest close stocks */}
         {topClose && topClose.length > 0 ? (
           <div className="w-full max-w-4xl rounded-lg bg-white p-6 text-black">
@@ -148,11 +147,7 @@ export default async function Dashboard() {
               })}
             </div>
           </div>
-        ) : (
-          <div className="flex w-full justify-center p-8">
-            <div className="text-gray-500">Loading...</div>
-          </div>
-        )}
+        ) : null}
       </div>
     </>
   );

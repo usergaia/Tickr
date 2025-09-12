@@ -9,12 +9,10 @@ if (
   !process.env.UPSTASH_REDIS_REST_TOKEN
 ) {
   console.error(
-    "❌ UPSTASH_REDIS_REST_URL or UPSTASH_REDIS_REST_TOKEN environment variables are not set",
+    "UPSTASH_REDIS_REST_URL or UPSTASH_REDIS_REST_TOKEN environment variables are not set",
   );
   process.exit(1);
 }
-
-console.log("🔗 Initializing Upstash Redis connection...");
 
 // create and export Redis client using Upstash REST API
 export const redis = new Redis({

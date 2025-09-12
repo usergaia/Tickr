@@ -18,13 +18,20 @@ app.get("/", (req: Request, res: Response) => {
   res.send("Hello from the server!!");
 });
 
+// health check for client to verify server is running
+app.get("/health", (req: Request, res: Response) => {
+  res
+    .status(200)
+    .json({ status: "healthy", timestamp: new Date().toISOString() });
+});
+
 // db
 connectDB()
   .then(() => {
     app.listen(port, () => {
-      console.log(`🚀 Server running on http://localhost:${port}`);
+      console.log(`Server running on http://localhost:${port}`);
     });
   })
   .catch((err) => {
-    console.error("❌ MongoDB connection error:", err);
+    console.error("MongoDB connection error:", err);
   });

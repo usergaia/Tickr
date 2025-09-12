@@ -1,4 +1,4 @@
-import { fetchOne, Stocks } from "@/util/stock-fetch";
+import { fetchOne } from "@/util/stock-fetch";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import Router from "@/hooks/Router";
@@ -13,7 +13,7 @@ export default async function StockDetail({
   const { symbol } = params;
 
   try {
-    const stockData: Stocks = await fetchOne(symbol);
+    const stockData = await fetchOne(symbol);
 
     // check if data exists
     if (!stockData || !stockData.symbol) {
@@ -284,6 +284,7 @@ export default async function StockDetail({
       </>
     );
   } catch (error) {
+    console.log(error);
     return (
       <>
         <div className="no-scrollbar flex min-h-screen flex-col">

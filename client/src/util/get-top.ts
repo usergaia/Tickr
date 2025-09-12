@@ -1,8 +1,7 @@
-import { Stocks, fetchStocks } from "./stock-fetch";
+import { Stocks } from "./stock-fetch";
 
-// get top 5 gainers by sorting the stocks by change difference
-export const getTopGain = async (): Promise<Stocks[]> => {
-  const data = await fetchStocks();
+// use the passed data instead of fetching
+export const getTopGain = (data: Stocks[]): Stocks[] => {
   return data
     .sort((a, b) => {
       const aLatest = a.historical?.[0];
@@ -16,9 +15,7 @@ export const getTopGain = async (): Promise<Stocks[]> => {
     .slice(0, 5);
 };
 
-// get top 6 stocks by sorting the stocks by latest close price
-export const getTopClose = async (): Promise<Stocks[]> => {
-  const data = await fetchStocks();
+export const getTopClose = (data: Stocks[]): Stocks[] => {
   return data
     .sort((a, b) => {
       const aLatest = a.historical?.[0];

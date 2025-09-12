@@ -2,6 +2,9 @@ import { StocksMenu } from "@/components/Menu";
 import { Header } from "../../components/Header";
 import { Footer } from "@/components/Footer";
 
+// disable static generation
+export const dynamic = "force-dynamic";
+
 export default function StocksPage() {
   return (
     <>
