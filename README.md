@@ -34,7 +34,7 @@ A full-stack web application for tracking software and SWE stocks with end-of-da
    npm install
    
    # Client dependencies
-   cd ../client
+   cd client
    npm install
    ```
 
