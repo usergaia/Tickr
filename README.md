@@ -1,6 +1,6 @@
 # Tickr | Stock Tracker
 
-A full-stack web application for tracking software and SWE stocks with end-of-day market data. Built with Next.js, Express.js, and Docker.
+A full-stack web application for tracking SWE stocks with end-of-day market data. Built with Next.js, Express.js, and Docker.
 
 ## Table of Contents
 - [Installation](#installation)
