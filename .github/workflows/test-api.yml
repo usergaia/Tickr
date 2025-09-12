@@ -38,8 +38,28 @@ jobs:
         
       - name: Start server for testing
         run: |
+          echo "Starting server..."
           npm start &
-          sleep 10
+          SERVER_PID=$!
+          echo "Server PID: $SERVER_PID"
+          
+          # Wait for server to be ready (up to 30 seconds)
+          echo "Waiting for server to start..."
+          for i in {1..30}; do
+            if curl -s http://localhost:1000/health > /dev/null 2>&1; then
+              echo "Server is ready after ${i} seconds"
+              break
+            fi
+            if [ $i -eq 30 ]; then
+              echo "Server failed to start within 30 seconds"
+              echo "Checking server logs..."
+              jobs
+              ps aux | grep node
+              exit 1
+            fi
+            echo "Attempt $i: Server not ready yet, waiting..."
+            sleep 1
+          done
         env:
           MongoDB_URI: ${{ secrets.MONGODB_URI }}
           AV_API: ${{ secrets.AV_API }}
