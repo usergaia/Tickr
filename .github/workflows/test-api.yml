@@ -1,0 +1,84 @@
+name: API Testing
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'server/**'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'server/**'
+
+jobs:
+  test-server-endpoints:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: server
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Install dependencies
+        run: npm install
+        
+      - name: Type check
+        run: npx tsc --noEmit
+        
+      - name: Build server
+        run: npm run build
+        
+      - name: Start server for testing
+        run: |
+          npm start &
+          sleep 10
+        env:
+          MongoDB_URI: ${{ secrets.MONGODB_URI }}
+          AV_API: ${{ secrets.AV_API }}
+          UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
+          UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
+          
+      - name: Test API endpoints
+        run: |
+          echo "Testing health endpoint..."
+          curl -f http://localhost:1000/health || exit 1
+          
+          echo "Testing stocks endpoint..."
+          curl -f http://localhost:1000/stocks || exit 1
+          
+          echo "Testing specific stock endpoint..."
+          curl -f http://localhost:1000/stocks/AAPL || exit 1
+          
+          echo "All API tests passed! ✅"
+          
+      - name: Create issue on API failure
+        if: failure()
+        uses: actions-cool/issues-helper@v3
+        with:
+          actions: "create-issue"
+          title: "🚨 API Tests Failed - ${{ github.sha }}"
+          body: |
+            **API Endpoint Testing Failed**
+            
+            - **Commit**: ${{ github.sha }}
+            - **Branch**: ${{ github.ref_name }}
+            - **Workflow**: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            - **Time**: ${{ github.event.head_commit.timestamp }}
+            
+            **Failed Endpoints:**
+            - `/health` - Health check endpoint
+            - `/stocks` - All stocks endpoint  
+            - `/stocks/AAPL` - Individual stock endpoint
+            
+            **Possible Issues:**
+            - Server startup failures
+            - Database connection problems
+            - Environment variable issues
+            - API key configuration
+            
+            @${{ github.actor }}

@@ -1,0 +1,99 @@
+name: Build & Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test-client:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: client
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Install dependencies
+        run: npm install
+        
+      - name: Type check
+        run: npx tsc --noEmit
+        
+      - name: Lint
+        run: npm run lint
+        
+      - name: Build client
+        run: npm run build
+        env:
+          NEXT_PUBLIC_API_URL: http://localhost:1000
+          
+      - name: Create issue on client failure
+        if: failure()
+        uses: actions-cool/issues-helper@v3
+        with:
+          actions: "create-issue"
+          title: "🚨 Client Build Failed - ${{ github.sha }}"
+          body: |
+            **Client Build/Test Failed**
+            
+            - **Commit**: ${{ github.sha }}
+            - **Branch**: ${{ github.ref_name }}
+            - **Workflow**: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            
+            **Possible Issues:**
+            - TypeScript compilation errors
+            - ESLint violations  
+            - Build configuration issues
+            - Missing dependencies
+            
+            @${{ github.actor }}
+
+  test-server:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: server
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          
+      - name: Install dependencies
+        run: npm install
+        
+      - name: Type check
+        run: npx tsc --noEmit
+        
+      - name: Build server
+        run: npm run build
+        
+      - name: Create issue on server failure
+        if: failure()
+        uses: actions-cool/issues-helper@v3
+        with:
+          actions: "create-issue"
+          title: "🚨 Server Build Failed - ${{ github.sha }}"
+          body: |
+            **Server Build/Test Failed**
+            
+            - **Commit**: ${{ github.sha }}
+            - **Branch**: ${{ github.ref_name }}
+            - **Workflow**: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            
+            **Possible Issues:**
+            - TypeScript compilation errors
+            - Build configuration issues
+            - Missing dependencies
+            - Import/export problems
+            
+            @${{ github.actor }}

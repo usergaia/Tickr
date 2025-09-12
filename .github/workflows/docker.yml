@@ -1,0 +1,61 @@
+name: Docker Build
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'server/Dockerfile'
+      - 'client/Dockerfile' 
+      - 'docker-compose.yml'
+      - 'server/**'
+      - 'client/**'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'server/Dockerfile'
+      - 'client/Dockerfile'
+      - 'docker-compose.yml'
+
+jobs:
+  test-docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Build server Docker image
+        run: |
+          echo "Building server image..."
+          docker build -t tickr-server ./server
+          
+      - name: Build client Docker image  
+        run: |
+          echo "Building client image..."
+          docker build -t tickr-client ./client
+          
+      - name: Test Docker Compose
+        run: |
+          echo "Testing Docker Compose configuration..."
+          docker-compose config
+          docker-compose build
+          
+      - name: Create issue on Docker failure
+        if: failure()
+        uses: actions-cool/issues-helper@v3
+        with:
+          actions: "create-issue"
+          title: "🚨 Docker Build Failed - ${{ github.sha }}"
+          body: |
+            **Docker Build/Test Failed**
+            
+            - **Commit**: ${{ github.sha }}
+            - **Branch**: ${{ github.ref_name }}
+            - **Workflow**: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+            
+            **Possible Issues:**
+            - Dockerfile syntax errors
+            - Missing dependencies in containers
+            - Docker Compose configuration issues
+            - Build context problems
+            - Base image issues
+            
+            @${{ github.actor }}
