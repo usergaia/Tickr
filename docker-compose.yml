@@ -1,0 +1,32 @@
+
+services:
+  server:
+    build: ./server          # build from server dir
+    ports:
+      - "1000:1000"         #  set host port 1000 to container port 1000
+    env_file:
+      - ./server/.env       #  set .env path
+    container_name: tickr-server
+    restart: unless-stopped  # restart if it crashes
+    # check if server is running before starting client
+    healthcheck: 
+      test: ["CMD", "curl", "-f", "http://localhost:1000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+  
+  client:
+    build: 
+      context: ./client # build from client dir
+      args: 
+        NEXT_PUBLIC_API_URL: http://server:1000 # api url for build time
+    ports:
+      - "3000:3000"       
+    environment:
+      - NEXT_PUBLIC_API_URL=http://server:1000  # api url for runtime
+    depends_on:
+      server:
+        condition: service_healthy  # wait for server to be healthy before starting client
+    container_name: tickr-client
+    restart: unless-stopped  # restart if it crashes
