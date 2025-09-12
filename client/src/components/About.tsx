@@ -10,8 +10,8 @@ export function About() {
       <div className="m-5 mt-4 flex flex-col items-center justify-center text-center lg:mr-40 lg:ml-28">
         <h1 className="mono text-4xl font-bold">About Tickr</h1>
         <p className="mono max-w-2xl text-center text-base text-[13px] text-gray-500 lg:mt-5 lg:text-sm">
-          Tickr is designed to track the popular software and technology stocks,
-          giving you clear insights into market movements. It highlights{" "}
+          Tickr is designed to track EOD close prices for popular SWE stocks,
+          giving you clear insights into their market movements. It highlights{" "}
           <span className="text-red-300">latest top gainers</span>,{" "}
           <span className="text-red-300">highest closing prices</span>, and{" "}
           <span className="text-red-300">visualization</span> of data. Tickr
