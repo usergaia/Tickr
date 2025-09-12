@@ -10,7 +10,7 @@ export function Footer() {
         © 2025 @usergaia
       </div>
       <div className="flex cursor-pointer flex-row gap-2 text-gray-500/50 lg:absolute lg:top-1/2 lg:right-4 lg:-translate-y-1/2">
-        <Router path="https://github.com/usergaia/Tickr">
+        <Router path="https://github.com/usergaia">
           <span className="text-2xl transition-colors hover:text-gray-700 lg:text-3xl">
             <FaGithub />
           </span>
