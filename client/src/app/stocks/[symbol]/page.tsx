@@ -182,7 +182,7 @@ export default async function StockDetail({
               <div className="mt-6 rounded-lg border border-gray-200 bg-white shadow-sm">
                 <div className="p-4 lg:p-6">
                   <h2 className="mb-4 text-lg font-semibold">
-                    Historical Data (Last 30 Days)
+                    Historical Data (Last 100 Days)
                   </h2>
                   {stockData.historical && stockData.historical.length > 0 ? (
                     <div className="overflow-x-auto">

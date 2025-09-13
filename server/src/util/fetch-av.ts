@@ -31,7 +31,7 @@ export async function fetchAndStoreAV() {
   try {
     for (const stockSymbol of stockSymbols) {
       await fetchStocks(stockSymbol);
-      console.log(`Stocks for ${stockSymbol} saved/updated (last 30 days).`);
+      console.log(`Stocks for ${stockSymbol} saved/updated (last 100 days).`);
     }
   } catch (error) {
     console.error("Error fetching stock data:", error);
@@ -68,7 +68,7 @@ async function fetchStocks(stockSymbol: string) {
   };
   const timeSeriesTyped = timeSeries as Record<string, TimeSeriesData>;
 
-  // store last 30 days of data to db
+  // store last 100 days of data to db
   const historical: HistoricalPrice[] = Object.entries(timeSeriesTyped)
     .map(([date, values]) => ({
       date: date,
@@ -79,7 +79,7 @@ async function fetchStocks(stockSymbol: string) {
       volume: parseInt(values["5. volume"]),
     }))
     .sort((a, b) => b.date.localeCompare(a.date)) // sort latest first
-    .slice(0, 30);
+    .slice(0, 100);
 
   await StockModel.updateOne(
     { symbol },
