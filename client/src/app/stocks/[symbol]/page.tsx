@@ -4,6 +4,7 @@ import { Footer } from "@/components/Footer";
 import Router from "@/hooks/Router";
 import { StockChart } from "@/components/StockChart";
 import { VolumeChart } from "@/components/VolumeChart";
+import clsx from "clsx";
 
 export default async function StockDetail({
   params, // destructure params right away
@@ -49,9 +50,10 @@ export default async function StockDetail({
 
                         return (
                           <div
-                            className={`text-sm font-medium ${
-                              change >= 0 ? "text-green-600" : "text-red-600"
-                            }`}
+                            className={clsx("text-sm font-medium", {
+                              "text-green-600": change >= 0,
+                              "text-red-600": change < 0,
+                            })}
                           >
                             {change >= 0 ? "+" : ""}
                             {change.toFixed(2)} ({changePercent >= 0 ? "+" : ""}
@@ -72,7 +74,10 @@ export default async function StockDetail({
                 <div className="lg:col-span-2">
                   {/* price chart */}
                   <div className="mb-6 rounded-lg border border-gray-200 bg-white p-4 shadow-sm lg:p-6">
-                    <h2 className="mb-4 text-lg font-semibold">Price Trend</h2>
+                    <h2 className="mb-1 text-lg font-semibold">Price Trend</h2>
+                    <p className="mb-4 text-[9px] text-gray-500 italic lg:hidden">
+                      View in desktop for better experience
+                    </p>
                     {stockData.historical && stockData.historical.length > 0 ? (
                       <StockChart
                         data={stockData.historical}
@@ -89,9 +94,12 @@ export default async function StockDetail({
 
                   {/* volume chart */}
                   <div className="rounded-lg border border-gray-200 bg-white p-4 shadow-sm lg:p-6">
-                    <h2 className="mb-4 text-lg font-semibold">
+                    <h2 className="mb-1 text-lg font-semibold">
                       Trading Volume
                     </h2>
+                    <p className="mb-4 text-[9px] text-gray-500 italic lg:hidden">
+                      View in desktop for better experience
+                    </p>
                     {stockData.historical && stockData.historical.length > 0 ? (
                       <VolumeChart
                         data={stockData.historical}
@@ -146,12 +154,14 @@ export default async function StockDetail({
                             <div className="flex justify-between text-sm">
                               <span className="text-gray-600">Change:</span>
                               <span
-                                className={`font-medium ${
-                                  stockData.historical[0].close >=
-                                  stockData.historical[1].close
-                                    ? "text-green-600"
-                                    : "text-red-600"
-                                }`}
+                                className={clsx("font-medium", {
+                                  "text-green-600":
+                                    stockData.historical[0].close >=
+                                    stockData.historical[1].close,
+                                  "text-red-600":
+                                    stockData.historical[0].close <
+                                    stockData.historical[1].close,
+                                })}
                               >
                                 $
                                 {(
@@ -181,36 +191,40 @@ export default async function StockDetail({
               {/* historical data */}
               <div className="mt-6 rounded-lg border border-gray-200 bg-white shadow-sm">
                 <div className="p-4 lg:p-6">
-                  <h2 className="mb-4 text-lg font-semibold">
-                    Historical Data (Last 100 Days)
+                  <h2 className="mb-1 text-lg font-semibold">
+                    Historical Data{" "}
+                    <span className="mono text-gray-500">(Last 100 Days)</span>
                   </h2>
+                  <p className="mb-4 text-[9px] text-gray-500 italic lg:hidden">
+                    View in desktop for better experience
+                  </p>
                   {stockData.historical && stockData.historical.length > 0 ? (
                     <div className="overflow-x-auto">
                       <table className="w-full text-sm">
                         <thead>
                           <tr className="border-b border-gray-200">
-                            <th className="px-4 py-2 text-left font-medium text-gray-600">
+                            <th className="px-4 py-2 text-left font-bold text-black">
                               Date
                             </th>
-                            <th className="px-4 py-2 text-left font-medium text-gray-600">
+                            <th className="px-4 py-2 text-left font-medium text-black">
                               Open
                             </th>
-                            <th className="px-4 py-2 text-left font-medium text-gray-600">
+                            <th className="px-4 py-2 text-left font-medium text-black">
                               High
                             </th>
-                            <th className="px-4 py-2 text-left font-medium text-gray-600">
+                            <th className="px-4 py-2 text-left font-medium text-black">
                               Low
                             </th>
-                            <th className="px-4 py-2 text-left font-medium text-gray-600">
+                            <th className="px-4 py-2 text-left font-medium text-black">
                               Close
                             </th>
-                            <th className="px-4 py-2 text-left font-medium text-gray-600">
+                            <th className="px-4 py-2 text-left font-medium text-black">
                               Volume
                             </th>
-                            <th className="px-4 py-2 text-left font-medium text-gray-600">
+                            <th className="px-4 py-2 text-left font-medium text-black">
                               Change
                             </th>
-                            <th className="px-4 py-2 text-left font-medium text-gray-600">
+                            <th className="px-4 py-2 text-left font-medium text-black">
                               Change %
                             </th>
                           </tr>
@@ -230,31 +244,43 @@ export default async function StockDetail({
                                 key={index}
                                 className="border-b border-gray-100"
                               >
-                                <td className="px-4 py-2">{data.date}</td>
-                                <td className="px-4 py-2">
+                                <td className="px-4 py-2 font-bold text-black">
+                                  {data.date}
+                                </td>
+                                <td className="px-4 py-2 text-gray-600">
                                   ${data.open?.toFixed(2) || "N/A"}
                                 </td>
-                                <td className="px-4 py-2">
+                                <td className="px-4 py-2 text-gray-600">
                                   ${data.high?.toFixed(2) || "N/A"}
                                 </td>
-                                <td className="px-4 py-2">
+                                <td className="px-4 py-2 text-gray-600">
                                   ${data.low?.toFixed(2) || "N/A"}
                                 </td>
-                                <td className="px-4 py-2">
+                                <td className="px-4 py-2 text-gray-600">
                                   ${data.close.toFixed(2)}
                                 </td>
-                                <td className="px-4 py-2">
+                                <td className="px-4 py-2 text-gray-600">
                                   {data.volume || "N/A"}
                                 </td>
                                 <td
-                                  className={`px-4 py-2 ${change >= 0 ? "text-green-600" : "text-red-600"}`}
+                                  className={clsx("px-4 py-2", {
+                                    "text-gray-500": !prevData,
+                                    "text-green-600": prevData && change >= 0,
+                                    "text-red-600": prevData && change < 0,
+                                  })}
                                 >
                                   {prevData
                                     ? `${change >= 0 ? "+" : ""}${change.toFixed(2)}`
                                     : "N/A"}
                                 </td>
                                 <td
-                                  className={`px-4 py-2 ${change >= 0 ? "text-green-600" : "text-red-600"}`}
+                                  className={clsx("px-4 py-2", {
+                                    "text-gray-500": !prevData,
+                                    "text-green-600":
+                                      prevData && changePercent >= 0,
+                                    "text-red-600":
+                                      prevData && changePercent < 0,
+                                  })}
                                 >
                                   {prevData
                                     ? `${changePercent >= 0 ? "+" : ""}${changePercent.toFixed(2)}%`
