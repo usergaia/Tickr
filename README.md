@@ -18,6 +18,7 @@ A full-stack web application for tracking SWE stocks with end-of-day market data
 - Docker and Docker Compose
 - MongoDB database
 - Alpha Vantage API key
+- Redis API Key/Token
 
 ### Local Development
 
@@ -184,7 +185,7 @@ npm run lint    # Run ESLint
 
 ### Deployment Platforms
 - **[Vercel](https://vercel.com/docs)** - Deploy Next.js applications
-- **[Render](https://render.com/docs)** - Deploy Node.js backend services
+- **[Render](https://render.com/docs)** - Deploy Node.js backend services  (Might take a while to load due to Render free plan restriction)
 
 ### Development Tools
 - **[Docker Documentation](https://docs.docker.com/)** - Containerization guide
