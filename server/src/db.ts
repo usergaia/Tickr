@@ -18,16 +18,20 @@ const connectDB = async (): Promise<void> => {
       "0 5 * * *",
       () => {
         const now = moment().tz("Asia/Manila");
-        if (now.hour() === 5) {
-          fetchAndStoreAV()
-            .then(() => console.log("scheduled data fetch complete"))
-            .catch((err) => console.error("Fetch error:", err));
-        }
+        console.log(
+          `Cron job triggered at: ${now.format("YYYY-MM-DD HH:mm:ss")} Manila time`,
+        );
+
+        fetchAndStoreAV()
+          .then(() => console.log("scheduled data fetch complete"))
+          .catch((err) => console.error("Fetch error:", err));
       },
       {
         timezone: "Asia/Manila",
       },
     );
+
+    console.log("Cron job scheduled for 5:00 AM Manila time daily");
   } catch (error: any) {
     console.error(`Error: ${error.message}`);
     process.exit(1);
