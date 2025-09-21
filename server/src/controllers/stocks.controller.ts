@@ -23,8 +23,8 @@ export const getItems = async (req: Request, res: Response): Promise<void> => {
       console.log("CACHE MISS - Fetching from database");
       const items: Stocks[] = await StockModel.find().sort({ date: 1 });
 
-      // cache the data (Upstash Redis set method; expiration set to 1 day)
-      await redis.set(cacheKey, JSON.stringify(items), { ex: 86400 });
+      // cache the data (Upstash Redis set method; expiration set to 12 hrs)
+      await redis.set(cacheKey, JSON.stringify(items), { ex: 43200 });
       console.log("Data stored in cache");
 
       res.status(200).json(items);
