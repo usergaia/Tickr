@@ -1,4 +1,4 @@
-> might fix the scheduled problem when i have the time, but the issue is most likely on render-side configs
+> will fix the cronjob issues when i have the time, but the issue is most likely on render-side configs cause of the free plan
 
 # Tickr | Stock Tracker
 
