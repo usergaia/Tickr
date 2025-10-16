@@ -4,21 +4,13 @@
 
 A full-stack web application for tracking SWE stocks with end-of-day market data. Built with Next.js, Express.js, and Docker.
 
-## Table of Contents
-- [Installation](#installation)
-- [Features](#features)
-- [Tech Stack](#tech-stack)
-- [API Endpoints](#api-endpoints)
-- [Contributing](#contributing)
 
-## Installation
-
-### Prerequisites
+## Built with
 - Node.js 20+
 - Docker and Docker Compose
 - MongoDB database
-- Alpha Vantage API key
-- Redis API Key/Token
+- Alpha Vantage API 
+- Redis 
 
 ## Features
 
