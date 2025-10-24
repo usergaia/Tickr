@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import StockModel, { Stocks } from "../models/stocks.model";
 import { redis } from "../redis";
+import { fetchAndStoreAV } from "../util/fetch-av";
 
 console.log("=== CONTROLLER FILE LOADED ===");
 
@@ -74,4 +75,43 @@ export const getItem = async (req: Request, res: Response): Promise<void> => {
   }
 
   console.log(`=== getItem for ${symbol} COMPLETED ===`);
+};
+
+// POST trigger fetch - protected by AV_API key
+export const triggerFetch = async (
+  req: Request,
+  res: Response,
+): Promise<void> => {
+  console.log("=== triggerFetch API CALLED ===");
+
+  try {
+    // Verify API key from header
+    const apiKey = req.headers["x-api-key"] || req.headers["authorization"];
+    if (!apiKey || apiKey !== process.env.AV_API) {
+      console.log("UNAUTHORIZED - Invalid or missing API key");
+      res.status(401).json({ message: "Unauthorized: Invalid API key" });
+      return;
+    }
+
+    console.log("API key verified - Starting fetch...");
+    await fetchAndStoreAV();
+
+    // Clear all stock caches after successful fetch
+    console.log("Clearing stock caches...");
+    await redis.del("all_stocks");
+
+    console.log("Fetch completed successfully");
+    res.status(200).json({
+      message: "Stock data fetched and stored successfully",
+      timestamp: new Date().toISOString(),
+    });
+  } catch (error: any) {
+    console.error("ERROR in triggerFetch:", error.message);
+    res.status(500).json({
+      message: "Failed to fetch stock data",
+      error: error.message,
+    });
+  }
+
+  console.log("=== triggerFetch COMPLETED ===");
 };

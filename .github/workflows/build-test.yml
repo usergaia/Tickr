@@ -43,7 +43,7 @@ jobs:
         uses: actions-cool/issues-helper@v3
         with:
           actions: "create-issue"
-          title: "🚨 Client Build Failed - ${{ github.sha }}"
+          title: "Client Build Failed - ${{ github.sha }}"
           body: |
             **Client Build/Test Failed**
             
@@ -89,7 +89,7 @@ jobs:
         uses: actions-cool/issues-helper@v3
         with:
           actions: "create-issue"
-          title: "🚨 Server Build Failed - ${{ github.sha }}"
+          title: "Server Build Failed - ${{ github.sha }}"
           body: |
             **Server Build/Test Failed**
             

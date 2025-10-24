@@ -1,0 +1,23 @@
+name: Test Schedule (Every 5 min)
+
+on:
+  schedule:
+    # Run every 5 minutes
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Log test message
+        run: |
+          echo "Scheduled test ran successfully!"
+          echo "Current time (UTC): $(date -u '+%Y-%m-%d %H:%M:%S')"
+          echo "Current time (Manila): TZ='Asia/Manila' date '+%Y-%m-%d %H:%M:%S'"
+          echo "This workflow is working!"
+          
+      - name: Test simple API call
+        run: |
+          echo "Testing connection to server..."
+          curl -s https://tickr-2rzg.onrender.com/health || echo "Server not reachable (this is okay for testing)"

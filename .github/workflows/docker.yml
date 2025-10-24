@@ -56,7 +56,7 @@ jobs:
         uses: actions-cool/issues-helper@v3
         with:
           actions: "create-issue"
-          title: "🚨 Docker Build Failed - ${{ github.sha }}"
+          title: "Docker Build Failed - ${{ github.sha }}"
           body: |
             **Docker Build/Test Failed**
             

@@ -108,12 +108,12 @@ npm run lint    # Run ESLint
 
 ## Features
 
-- 📈 **End-of-Day Stock Data** - Track software and technology stocks with daily market data
-- 🚀 **Top Gainers** - View latest stocks who had the highest gains
-- 💰 **Highest Close Prices** - Monitor highest performing stocks
-- ⚡ **Fast Performance** - Redis caching and client-side optimization
-- 🐳 **Docker Support** - Easy deployment and development
-- 🔄 **Auto-refresh** - Daily data updates with caching [wip]
+- **End-of-Day Stock Data** - Track software and technology stocks with daily market data
+- **Top Gainers** - View latest stocks who had the highest gains
+- **Highest Close Prices** - Monitor highest performing stocks
+- **Fast Performance** - Redis caching and client-side optimization
+- **Docker Support** - Easy deployment and development
+- **Auto-refresh** - Daily data updates with caching [wip]
 
 ## Tech Stack
 

@@ -1,0 +1,21 @@
+name: Scheduled stock fetch (AlphaVantage)
+on:
+  schedule:
+    # Run daily at 21:00 UTC == 05:00 Asia/Manila (next day)
+    - cron: '0 21 * * *'
+  workflow_dispatch:
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger fetch endpoint
+        env:
+          API_URL: ${{ 'https://tickr-2rzg.onrender.com' }}
+          AV_API: ${{ secrets.AV_API }}
+        run: |
+          curl -X POST "$API_URL/stocks/fetch" \
+            -H "x-api-key: $AV_API" \
+            -H "Content-Type: application/json" \
+            --fail-with-body \
+            -w "\nHTTP Status: %{http_code}\n"

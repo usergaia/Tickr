@@ -1,5 +1,9 @@
 import { Router } from "express";
-import { getItem, getItems } from "../controllers/stocks.controller";
+import {
+  getItem,
+  getItems,
+  triggerFetch,
+} from "../controllers/stocks.controller";
 
 const router = Router();
 
@@ -14,6 +18,12 @@ router.get("/", (req, res, next) => {
 router.get("/:symbol", (req, res, next) => {
   console.log(`*** ROUTE HIT: GET /${req.params.symbol} (getItem) ***`);
   getItem(req, res);
+});
+
+// POST - trigger fetch (protected by API key)
+router.post("/fetch", (req, res, next) => {
+  console.log("*** ROUTE HIT: POST /fetch (triggerFetch) ***");
+  triggerFetch(req, res);
 });
 
 export default router;
