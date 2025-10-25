@@ -13,7 +13,7 @@ export type Stocks = {
   name?: string;
   stock_name?: string;
   historical: HistoricalPrice[];
-  lastRefreshed?: string;
+  lastRefreshed: string;
   timezone?: string;
 };
 

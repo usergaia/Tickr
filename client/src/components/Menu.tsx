@@ -19,7 +19,12 @@ export async function StocksMenu() {
           </h1>
           <div className="mt-2 flex items-center text-xs text-gray-500">
             <MdHistory className="mr-1" />
-            Last updated: {allStocks?.[0]?.lastRefreshed || "N/A"}
+            Last updated:{" "}
+            {allStocks?.sort(
+              (a, b) =>
+                new Date(b.lastRefreshed).getTime() -
+                new Date(a.lastRefreshed).getTime(),
+            )?.[0]?.lastRefreshed || "N/A"}
           </div>
         </div>
       </div>
