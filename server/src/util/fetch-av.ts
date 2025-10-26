@@ -9,6 +9,7 @@ function sleep(ms: number) {
 }
 
 export async function fetchAndStoreAV() {
+  // limit the fetch to 12 symbols to reduce AlphaVantage quota usage with GitHub actions
   const stockSymbols = [
     "AAPL",
     "ADBE",
@@ -22,14 +23,6 @@ export async function fetchAndStoreAV() {
     "INTU",
     "META",
     "MSFT",
-    "NET",
-    "NOW",
-    "NVDA",
-    "ORCL",
-    "PLTR",
-    "SAP",
-    "SNOW",
-    "WDAY",
   ];
 
   console.log(`Starting to fetch ${stockSymbols.length} symbols...`);
