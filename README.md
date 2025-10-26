@@ -1,5 +1,3 @@
-> will fix the cronjob issues when i have the time, but the issue is most likely on render-side configs cause of the free plan
-
 # Tickr | Stock Tracker
 
 A full-stack web application for tracking SWE stocks with end-of-day market data. Built with Next.js, Express.js, and Docker.
