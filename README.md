@@ -22,8 +22,7 @@ A full-stack web application for tracking SWE stocks with end-of-day market data
 ## Tech Stack
 
 **Frontend:**
-- Next.js 15.5.2 with Turbopack
-- React 19
+- Next.js 
 - TypeScript
 - Tailwind CSS
 - Chart.js for data visualization
@@ -31,9 +30,8 @@ A full-stack web application for tracking SWE stocks with end-of-day market data
 **Backend:**
 - Express.js
 - TypeScript
-- MongoDB with Mongoose
+- MongoDB (Atlas)
 - Redis (Upstash) for caching
-- Alpha Vantage API integration
 
 **DevOps:**
 - Docker & Docker Compose
