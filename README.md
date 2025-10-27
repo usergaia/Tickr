@@ -17,7 +17,7 @@ A full-stack web application for tracking SWE stocks with end-of-day market data
 - **Highest Close Prices** - Monitor highest performing stocks
 - **Fast Performance** - Redis caching and client-side optimization
 - **Docker Support** - Easy deployment and development
-- **Auto-refresh** - Daily data updates with caching [wip]
+- **Auto-fetching** - Daily data updates with caching via GitHub actions
 
 ## Tech Stack
 
