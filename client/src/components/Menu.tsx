@@ -29,7 +29,7 @@ export async function StocksMenu() {
         </div>
       </div>
 
-      <div className="lg:gap-3lg:px-6 mx-auto grid max-w-7xl grid-cols-1 gap-4 px-4 pb-4 sm:grid-cols-2 lg:grid-cols-3 lg:pb-3 xl:grid-cols-4 xl:px-11 2xl:grid-cols-5">
+      <div className="mx-auto grid max-w-7xl grid-cols-1 gap-4 px-4 pb-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-3 lg:px-6 lg:pb-3">
         {allStocks?.map((stock) => {
           const latest = stock.historical?.[0];
           const prev = stock.historical?.[1];
@@ -42,7 +42,7 @@ export async function StocksMenu() {
               {/* stock cards */}
               <div
                 className={clsx(
-                  "cursor-pointer rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md lg:p-4",
+                  "cursor-pointer rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition-shadow hover:shadow-md lg:p-7",
                   change >= 0
                     ? "border-l-4 border-l-green-400 hover:shadow-green-400/20"
                     : "border-l-4 border-l-red-400 hover:shadow-red-400/20",
