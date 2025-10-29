@@ -14,16 +14,15 @@ A full-stack web application for tracking SWE stocks with end-of-day market data
 
 - **End-of-Day Stock Data** - Track software and technology stocks with daily market data
 - **Top Gainers** - View latest stocks who had the highest gains
-- **Highest Close Prices** - Monitor highest performing stocks
-- **Fast Performance** - Redis caching and client-side optimization
+- **Highest OHLCV Prices** - Monitor highest performing stocks
+- **Fast Performance/ Efficient API Handling** - Redis caching and client-side optimization
 - **Docker Support** - Easy deployment and development
-- **Auto-refresh** - Daily data updates with caching [wip]
+- **Auto-fetching** - Daily data updates with caching via GitHub actions
 
 ## Tech Stack
 
 **Frontend:**
-- Next.js 15.5.2 with Turbopack
-- React 19
+- Next.js 
 - TypeScript
 - Tailwind CSS
 - Chart.js for data visualization
@@ -31,9 +30,8 @@ A full-stack web application for tracking SWE stocks with end-of-day market data
 **Backend:**
 - Express.js
 - TypeScript
-- MongoDB with Mongoose
+- MongoDB (Atlas)
 - Redis (Upstash) for caching
-- Alpha Vantage API integration
 
 **DevOps:**
 - Docker & Docker Compose
