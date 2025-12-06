@@ -9,7 +9,7 @@ import clsx from "clsx";
 export default async function StockDetail({
   params, // destructure params right away
 }: {
-  params: { symbol: string };
+  params: Promise<{ symbol: string }>;
 }) {
   const { symbol } = await params;
 
